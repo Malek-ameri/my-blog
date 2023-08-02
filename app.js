@@ -27,8 +27,11 @@ app.use(function (req, res, next) {
 
 app.use((err, req, res, next) => {
 
+  if(err.message.startsWith('invalid token')) {
+    return res.status(401).json({status:"fail",message:'invalid token'})
+  }
   if(err.message.startsWith('jwt expired')) {
-    return res.status(401).json({status:"fail",message:'refresh token expired'})
+    return res.status(401).json({status:"fail",message:'token expired'})
   }
   if(err.message.startsWith('jwt malformed')) {
     return res.status(401).json({status:"fail",message:'refresh token missing'})

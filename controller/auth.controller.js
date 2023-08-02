@@ -10,9 +10,7 @@ const redisClient = require("../database/redis.connection")
 
 const logout = async (req, res, next) => {
 
-  console.log(req.userId)
   const id = req.userId.toString()
-  console.log(id)
   await redisClient.SETEX(id , + process.env.EXPIRES_DATA_IN_REDIS_DELETE_REFRESH_TOKEN,"null")
 
   res.status(204).json({

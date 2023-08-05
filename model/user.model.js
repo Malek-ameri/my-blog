@@ -42,7 +42,7 @@ const userSchema = new Schema({
   },
   avatar:{
     type:String,
-    default:"defualt-avatar.PNG"
+    default:"user-default-avatar.jpeg"
   }
 });
 

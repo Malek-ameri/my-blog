@@ -27,6 +27,10 @@ app.use(function (req, res, next) {
 
 app.use((err, req, res, next) => {
 
+  if(err.message.startsWith('Unexpected field')) {
+    return res.status(400).json({status:"fail",message:'filed name must be image'})
+  }
+
   if(err.message.startsWith('invalid token')) {
     return res.status(401).json({status:"fail",message:'invalid token'})
   }

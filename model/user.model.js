@@ -40,6 +40,10 @@ const userSchema = new Schema({
     lowercase: true,
     trim: true,
   },
+  avatar:{
+    type:String,
+    default:"defualt-avatar.PNG"
+  }
 });
 
 module.exports = model("User", userSchema);

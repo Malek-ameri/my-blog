@@ -4,8 +4,6 @@ const { comparePasssword, hashPasssword } = require("../utils/hash")
 const { AppError } = require("../utils/AppError")
 
 
-
-
 const getUser = async (req, res, next) => {
     const user = await User.findById(req.userId)
     res.status(200).json({ status: "success", data: user });
@@ -72,4 +70,12 @@ const editUserProfile = async (req, res, next) => {
 	});
 };
 
-module.exports = { getUser, deleteAccount, changePassword,editUserProfile }
+const editAvatar = async (req, res, next) => {
+	const updateAvatar = await User.findByIdAndUpdate(req.userId,{avatar:req.avatarName})
+	res.status(202).json({
+		status: 'success',
+		data: { updateAvatar }
+	});
+}
+
+module.exports = { getUser, deleteAccount, changePassword,editUserProfile,editAvatar }

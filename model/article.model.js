@@ -16,7 +16,7 @@ const ArticleSchema = new Schema({
 	},
 	image: {
 		type: String,
-		default: 'default-article-thumbnail.jpeg'
+		default: 'article-default-image.jpeg'
 	}
 },{timestamps:true});
 

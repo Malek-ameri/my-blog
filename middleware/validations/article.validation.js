@@ -5,4 +5,9 @@ const createArticleSchema = Joi.object({
 	content: Joi.string().required().trim()
 });
 
-module.exports = { createArticleSchema };
+const updateArticleSchema = Joi.object({
+	title: Joi.string().min(3).max(40).trim(),
+	content: Joi.string().trim()
+});
+
+module.exports = { createArticleSchema, updateArticleSchema };

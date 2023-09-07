@@ -58,5 +58,18 @@ const deleteComment = asyncHandler(async (req, res, next) => {
     })
 })
 
+const getCommentByArticleId = asyncHandler(async (req, res, next) => {
 
-module.exports = { createComment, updateComment, deleteComment }
+    const { id: articleId } = req.params
+    console.log(articleId)
+
+    const findCommetns = await Comment.find({ article:articleId }).populate("author")
+
+    res.status(200).json({
+        status: 'success',
+        data: findCommetns
+    })
+})
+
+
+module.exports = { createComment, updateComment, deleteComment,getCommentByArticleId }

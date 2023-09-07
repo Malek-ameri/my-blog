@@ -1,15 +1,18 @@
 const express = require("express");
-const createError = require("http-errors");
+const cors = require("cors")
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { connectToDatabase } = require("./database/database.connection");
 const apiRouter = require("./routes/routes");
+const { AppError } = require("./utils/AppError");
+
 
 const app = express();
 connectToDatabase();
 require("./database/redis.connection")
 
+app.use(cors())
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,11 +22,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", apiRouter );
 
 app.use(function (req, res, next) {
-  next(createError(404));
+  next(new AppError(404,"Not Found"));
 });
-
-// error handler
-
 
 app.use((err, req, res, next) => {
 

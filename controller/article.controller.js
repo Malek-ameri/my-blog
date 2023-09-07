@@ -120,7 +120,6 @@ const getAllArticle = asyncHandler(async (req, res, next) => {
 const getArticle = asyncHandler(async (req, res, next) => {
 
 	const { id: articleId } = req.params
-
 	const article = await Article.findById({ _id: articleId }).populate("author")
 	if (!article) return next(new AppError(404, "Not found article"))
 
